@@ -24,7 +24,7 @@ const Input = () => {
   }
 
   return (
-    <View style={{ padding: 16, backgroundColor: 'white' }}>
+    <View>
       <TextInput
         style={styles.input}
         onChangeText={setText}

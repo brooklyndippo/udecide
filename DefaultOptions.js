@@ -4,10 +4,9 @@ import {
   Text, FlatList, TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import Input from './Input';
-import ListOptions from './ListOptions';
-import Decision from './Decision';
-import DefaultOptions from './DefaultOptions';
+
+import { useDispatch } from 'react-redux'
+import { addOption} from './Options'
 
 const defaultCuisines = [
   '🍕 Italian',
@@ -32,33 +31,35 @@ const defaultCuisines = [
   '🥟 Russian',
 ];
 
-export default function Base() {
+export default function DefaultOptions() {
+  const dispatch = useDispatch()
+
+  function handleAddDefault(item) {
+    dispatch(addOption(item))
+  }
+
   return (
-    <View style={{ padding: 16, backgroundColor: 'white' }}>
-      <Input/>
-      <DefaultOptions/>
-      <ListOptions/>
-      <Decision/>
+    <View>
+      <Text>Or choose from a list of cuisines:</Text>
+      <FlatList
+        style={styles.defaultList}
+        data={defaultCuisines}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.defaultOptions}
+            onPress={handleAddDefault.bind(this, item)}
+          >
+            <Text style={styles.listItemText}>{item}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={item => item}
+        horizontal={true}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 16,
-    paddingLeft: 8,
-  },
-  listItem: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-  },
-  listItemText: {
-    fontSize: 16,
-  },
   defaultList: {
     display:'flex',
     flexDirection: 'row',
