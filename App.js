@@ -1,14 +1,12 @@
-import { Button, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { store } from './store'
+import { Provider } from 'react-redux'
 
-import TabNavigator from './TabNavigator';
+import Main from './Main';
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <SafeAreaView>
-        <Text>What are your options?</Text>
-      </SafeAreaView>
-      <TabNavigator/>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Main />
+    </Provider>
   );
 }

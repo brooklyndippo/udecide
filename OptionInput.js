@@ -8,10 +8,15 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { useDispatch } from 'react-redux'
+import { addOption} from './Options'
+import ListOptions from './ListOptions';
 
 const Options = () => {
   const [text, setText] = useState('');
   const [items, setItems] = useState([]);
+
+  const dispatch = useDispatch()
 
   const handleSubmit = () => {
     if (text.trim() === '') {
@@ -37,13 +42,14 @@ const Options = () => {
         value={text}
         placeholder="Option... "
       />
-      <Button onPress={handleSubmit} title="Submit" />
-      <FlatList
+      <Button onPress={() => dispatch(addOption(text))} title="Submit" />
+      {/* <FlatList
         data={items}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         style={{ marginTop: 16 }}
-      />
+      /> */}
+      <ListOptions/>
       <Button title="Decide for me" />
     </View>
   );
