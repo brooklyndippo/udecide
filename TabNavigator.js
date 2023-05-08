@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-import Options from './OptionInput';
+import Base from './Base';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,32 +14,42 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Options}
+        name="What to Eat"
+        component={Base}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Food',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="food-fork-drink" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Shuffle"
-        component={Options}
+        name="What to Do"
+        component={Base}
         options={{
-          tabBarLabel: 'Shuffle',
+          tabBarLabel: 'Activities',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="shuffle" color={color} size={size} />
+            <MaterialIcons name="emoji-people" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Dice"
-        component={Options}
+        name="Where to go"
+        component={Base}
         options={{
-          tabBarLabel: 'Dice',
+          tabBarLabel: 'Places',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="dice-multiple" color={color} size={size} />
+            <MaterialIcons name="location-city" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Anything"
+        component={Base}
+        options={{
+          tabBarLabel: 'Other',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="sticker-plus-outline" color={color} size={size} />
           ),
         }}
       />

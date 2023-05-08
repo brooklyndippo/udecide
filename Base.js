@@ -3,44 +3,19 @@ import {
   View,
   TextInput,
   Button,
-  Alert,
-  FlatList,
-  Text,
   StyleSheet,
 } from 'react-native';
 import { useDispatch } from 'react-redux'
 import { addOption} from './Options'
+import Input from './Input';
 import ListOptions from './ListOptions';
 import Decision from './Decision';
 
-const Options = () => {
-  const [text, setText] = useState('');
-
-  const dispatch = useDispatch()
-
-  function handleKeyPress(e) {
-    if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === 'Return') {
-      handleSubmit()
-    }
-  }
-
-  function handleSubmit() {
-    dispatch(addOption(text))
-    setText('')
-  }
-
+export default function Base() {
   return (
     <View style={{ padding: 16, backgroundColor: 'white' }}>
-      <TextInput
-        style={styles.input}
-        onChangeText={setText}
-        value={text}
-        placeholder="Option... "
-        onKeyPress={handleKeyPress}
-        returnKeyType='send'
-        onSubmitEditing={handleSubmit}
-      />
-      <Button onPress={handleSubmit} title="Add option" />
+      <Input/>
+      {/* <Button onPress={handleSubmit} title="Add option" /> */}
       <ListOptions/>
       <Decision/>
     </View>
@@ -64,6 +39,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-export default Options;
-
