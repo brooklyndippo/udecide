@@ -6,7 +6,7 @@ export default function ListOptions() {
 
   const renderItem = ({ item }) => (
     <View style={styles.listItem}>
-      <Text key={item}>{item}</Text>
+      <Text >{item}</Text>
     </View>
   );
 
@@ -15,7 +15,7 @@ export default function ListOptions() {
 			<FlatList 
 				data={options}
 				renderItem={(renderItem)}
-				keyExtractor={(item) => item.text}
+				keyExtractor={(item) => item}
         style={{ marginTop: 16 }}
 			/>
 		</View>

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { useSelector } from 'react-redux'
 import {
   Animated,
@@ -6,20 +6,21 @@ import {
   View,
   StyleSheet,
   Button,
-  SafeAreaView,
 } from 'react-native';
 
 export default function Decision() {
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
-
   const options = useSelector(state => state.options.value)
 
-  const randomDecision = options[~~(Math.random() * options.length)]
+  const getRandomDecision = () => {
+    return options[Math.floor(Math.random() * options.length)];
+  };
 
-  console.log(options)
-  console.log(randomDecision)
+  const [randomDecision, setRandomDecision] = useState(getRandomDecision());
+
   const fadeIn = () => {
+    setRandomDecision(getRandomDecision());
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       toValue: 1,
@@ -59,12 +60,12 @@ export default function Decision() {
 
 const styles = StyleSheet.create({
   fadingContainer: {
-    flex: 1,
     padding: 20,
     backgroundColor: 'powderblue',
   },
   fadingText: {
     fontSize: 28,
+    color: 'black'
   },
   buttonRow: {
     flexBasis: 100,
