@@ -1,12 +1,23 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { Pressable, View, Text, FlatList, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
+
+import { useDispatch } from 'react-redux'
+import { deleteOption } from './Options'
 
 export default function ListOptions() {
 	const options = useSelector(state => state.options.value)
+  const dispatch = useDispatch()
 
-  const renderItem = ({ item }) => (
+  function handleDelete(index) {
+    console.log(index)
+    console.log(options[index])
+    dispatch(deleteOption(index));
+  }
+
+  const renderItem = ({ item, index }) => (
     <View style={styles.listItem}>
-      <Text >{item}</Text>
+      <Text style={styles.listItemText}>{item}</Text>
+      <Pressable style={styles.deleteButton} onPress={() => handleDelete(index)}><Text style={styles.deleteText}>x</Text></Pressable>
     </View>
   );
 
@@ -24,12 +35,28 @@ export default function ListOptions() {
 
 const styles = StyleSheet.create({
   listItem: {
-    padding: 16,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 8,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
   },
   listItemText: {
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: 'semibold',
     color: 'black',
   },
+  deleteButton: {
+    backgroundColor: 'black',
+    borderRadius: 4,
+  },
+  deleteText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  }
 });

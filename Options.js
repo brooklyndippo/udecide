@@ -10,9 +10,12 @@ export const optionsSlice = createSlice({
 	reducers: {
 		addOption: (state, action) => {
 			state.value.unshift(action.payload)
+		},
+		deleteOption: (state, action) => {
+			state.value.splice(action, 1)
 		}
 	}
 })
 
-export const { addOption } = optionsSlice.actions
+export const { addOption, deleteOption } = optionsSlice.actions
 export default optionsSlice.reducer
