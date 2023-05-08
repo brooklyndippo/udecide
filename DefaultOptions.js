@@ -31,19 +31,20 @@ const defaultCuisines = [
   '🥟 Russian',
 ];
 
-export default function DefaultOptions() {
+export default function DefaultOptions(props) {
   const dispatch = useDispatch()
-
+  const { category, defaultOptions } = props
+  console.log(defaultOptions)
   function handleAddDefault(item) {
     dispatch(addOption(item))
   }
 
   return (
     <View>
-      <Text>Or choose from a list of cuisines:</Text>
+      <Text>Or choose from a list of {category}:</Text>
       <FlatList
         style={styles.defaultList}
-        data={defaultCuisines}
+        data={defaultOptions}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.defaultOptions}

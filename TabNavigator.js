@@ -3,6 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Base from './Base';
+import Food from './Views/Food';
+import Activities from './Views/Activities';
+import Places from './Views/Places';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +18,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="What to Eat"
-        component={Base}
+        component={Food}
         options={{
           tabBarLabel: 'Food',
           tabBarIcon: ({ color, size }) => (
@@ -25,7 +28,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="What to Do"
-        component={Base}
+        component={Activities}
         options={{
           tabBarLabel: 'Activities',
           tabBarIcon: ({ color, size }) => (
@@ -35,7 +38,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Where to go"
-        component={Base}
+        component={Places}
         options={{
           tabBarLabel: 'Places',
           tabBarIcon: ({ color, size }) => (
