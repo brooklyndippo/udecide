@@ -9,6 +9,7 @@ export const optionsSlice = createSlice({
 	initialState,
 	reducers: {
 		addOption: (state, action) => {
+			!state.value.includes(action.payload) &&
 			state.value.unshift(action.payload)
 		},
 		deleteOption: (state, action) => {
