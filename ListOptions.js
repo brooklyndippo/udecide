@@ -9,8 +9,6 @@ export default function ListOptions() {
   const dispatch = useDispatch()
 
   function handleDelete(index) {
-    console.log(index)
-    console.log(options[index])
     dispatch(deleteOption(index));
   }
 
