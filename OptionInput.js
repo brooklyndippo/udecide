@@ -11,28 +11,23 @@ import {
 import { useDispatch } from 'react-redux'
 import { addOption} from './Options'
 import ListOptions from './ListOptions';
+import Decision from './Decision';
 
 const Options = () => {
   const [text, setText] = useState('');
-  const [items, setItems] = useState([]);
 
   const dispatch = useDispatch()
 
-  const handleSubmit = () => {
-    if (text.trim() === '') {
-      Alert.alert('Error', 'Input field cannot be empty');
-      return;
+  function handleKeyPress(e) {
+    if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === 'Return') {
+      handleSubmit()
     }
+  }
 
-    setItems((prevItems) => [...prevItems, { id: Date.now().toString(), text }]);
-    setText('');
-  };
-
-  const renderItem = ({ item }) => (
-    <View style={styles.listItem}>
-      <Text style={styles.listItemText}>{item.text}</Text>
-    </View>
-  );
+  function handleSubmit() {
+    dispatch(addOption(text))
+    setText('')
+  }
 
   return (
     <View style={{ padding: 16, backgroundColor: 'white' }}>
@@ -41,16 +36,13 @@ const Options = () => {
         onChangeText={setText}
         value={text}
         placeholder="Option... "
+        onKeyPress={handleKeyPress}
+        returnKeyType='send'
+        onSubmitEditing={handleSubmit}
       />
-      <Button onPress={() => dispatch(addOption(text))} title="Submit" />
-      {/* <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        style={{ marginTop: 16 }}
-      /> */}
+      <Button onPress={handleSubmit} title="Add option" />
       <ListOptions/>
-      <Button title="Decide for me" />
+      <Decision/>
     </View>
   );
 };
