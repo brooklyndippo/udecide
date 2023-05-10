@@ -6,9 +6,21 @@ import {
   View,
   StyleSheet,
   Button,
+  TouchableOpacity,
+  Pressable
 } from 'react-native';
 
+import { useDispatch } from 'react-redux'
+import { clearAllOptions } from './Options'
+
 export default function Decision() {
+  const dispatch = useDispatch();
+
+  function handleClearOptions() {
+    dispatch(clearAllOptions());
+    fadeOut();
+  }
+
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const options = useSelector(state => state.options.value)
@@ -33,16 +45,20 @@ export default function Decision() {
     // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 3000,
+      duration: 1500,
       useNativeDriver: true,
     }).start();
   };
 
   return (
-    <View>
+    <View style={styles.decisionBox}>
       <View style={styles.buttonRow}>
-        <Button title="Decide for me!" onPress={fadeIn} />
-        <Button title="Reset" onPress={fadeOut} />
+        <TouchableOpacity style={styles.decisionButton} onPress={fadeIn}>
+          <Text>Decide for me!</Text>
+        </TouchableOpacity>
+        <Pressable style={styles.resetButton} onPress={()=>handleClearOptions()}>
+          <Text>Reset Options</Text>
+        </Pressable>
       </View>
       <Animated.View
         style={[
@@ -59,17 +75,33 @@ export default function Decision() {
 };
 
 const styles = StyleSheet.create({
+  decisionBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
   fadingContainer: {
     padding: 20,
-    backgroundColor: 'powderblue',
   },
   fadingText: {
     fontSize: 28,
-    color: 'black'
+    color: 'black',
+    textAlign: 'center',
   },
   buttonRow: {
     flexBasis: 100,
     justifyContent: 'space-evenly',
     marginVertical: 16,
+  },
+  decisionButton: {
+    alignItems: 'center',
+    backgroundColor: 'powderblue',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 4,
+  },
+  resetButton: {
+    alignItems: 'center',
+    color: 'red',
   },
 });

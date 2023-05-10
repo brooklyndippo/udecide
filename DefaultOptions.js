@@ -34,7 +34,6 @@ const defaultCuisines = [
 export default function DefaultOptions(props) {
   const dispatch = useDispatch()
   const { category, defaultOptions } = props
-  console.log(defaultOptions)
   function handleAddDefault(item) {
     dispatch(addOption(item))
   }

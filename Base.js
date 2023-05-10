@@ -9,7 +9,7 @@ export default function Base(props) {
   const { category, defaultOptions } = props
 
   return (
-    <View style={{ minHeight: 750, padding: 16, backgroundColor: 'white' }}>
+    <View style={{ minHeight: 750, padding: 16, backgroundColor: 'white', display: 'flex', flexDirection: 'column'}}>
       <Input/>
       {category && defaultOptions && <DefaultOptions category={category} defaultOptions={defaultOptions}/>}
       <ListOptions/>

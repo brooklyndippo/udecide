@@ -25,7 +25,7 @@ export default function ListOptions() {
 				data={options}
 				renderItem={(renderItem)}
 				keyExtractor={(item) => item}
-        style={{ marginTop: 16 }}
+        style={{ marginTop: 16, maxHeight: 300 }}
 			/>
 		</View>
 	)
