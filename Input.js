@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux'
 import { addOption} from './Options'
+import * as DOMPurify from 'dompurify'
 
 const Input = () => {
   const [text, setText] = useState('');
@@ -19,7 +20,8 @@ const Input = () => {
   }
 
   function handleSubmit() {
-    dispatch(addOption(text))
+    const sanitizedInput = DOMPurify.sanitize(text);
+    dispatch(addOption(sanitizedInput))
     setText('')
   }
 
